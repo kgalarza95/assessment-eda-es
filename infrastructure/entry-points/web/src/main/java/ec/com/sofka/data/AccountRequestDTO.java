@@ -2,15 +2,17 @@ package ec.com.sofka.data;
 
 import java.math.BigDecimal;
 
-public class RequestDTO {
+public class AccountRequestDTO {
+
     public String customerId;
     //Name
     public String customer;
     //NumAcc
     public String account;
+
     public BigDecimal balance;
 
-    public RequestDTO(String customerId, String customer, String account, BigDecimal balance) {
+    public AccountRequestDTO(String customerId, String customer, String account, BigDecimal balance) {
         this.customerId = customerId;
         this.customer = customer;
         this.account = account;

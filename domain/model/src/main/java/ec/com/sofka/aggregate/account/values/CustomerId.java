@@ -1,4 +1,4 @@
-package ec.com.sofka.aggregate.values;
+package ec.com.sofka.aggregate.account.values;
 
 import ec.com.sofka.generics.utils.Identity;
 

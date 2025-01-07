@@ -2,7 +2,7 @@ package ec.com.sofka;
 
 import ec.com.sofka.data.EventEntity;
 import ec.com.sofka.database.events.IEventMongoRepository;
-import ec.com.sofka.gateway.IEventStore;
+import ec.com.sofka.gateway.IEventStoreGateway;
 import ec.com.sofka.generics.domain.DomainEvent;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class EventMongoAdapter implements IEventStore {
+public class EventMongoAdapter implements IEventStoreGateway {
 
     private final IEventMongoRepository repository;
     private final IJSONMapper mapper;

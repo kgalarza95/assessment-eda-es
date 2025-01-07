@@ -1,9 +1,8 @@
 package ec.com.sofka;
 
-import ec.com.sofka.account.Account;
 import ec.com.sofka.data.AccountEntity;
 import ec.com.sofka.database.account.IMongoRepository;
-import ec.com.sofka.gateway.AccountRepository;
+import ec.com.sofka.gateway.AccountRepositoryGateway;
 import ec.com.sofka.gateway.dto.AccountDTO;
 import ec.com.sofka.mapper.AccountMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,7 +10,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AccountMongoAdapter implements AccountRepository {
+public class AccountMongoAdapter implements AccountRepositoryGateway {
 
     private final IMongoRepository repository;
     private final MongoTemplate accountMongoTemplate;

@@ -1,22 +1,22 @@
-package ec.com.sofka;
+package ec.com.sofka.usecase.account;
 
 
-import ec.com.sofka.aggregate.Customer;
+import ec.com.sofka.aggregate.account.AccountAggregate;
 import ec.com.sofka.request.CreateAccountRequest;
-import ec.com.sofka.gateway.AccountRepository;
-import ec.com.sofka.gateway.IEventStore;
+import ec.com.sofka.gateway.AccountRepositoryGateway;
+import ec.com.sofka.gateway.IEventStoreGateway;
 import ec.com.sofka.gateway.dto.AccountDTO;
 import ec.com.sofka.generics.interfaces.IUseCase;
 import ec.com.sofka.responses.CreateAccountResponse;
 
 //Usage of the IUseCase interface
 public class CreateAccountUseCase implements IUseCase<CreateAccountRequest,CreateAccountResponse> {
-    private final IEventStore repository;
-    private final AccountRepository accountRepository;
+    private final IEventStoreGateway iEventStoreGateway;
+    private final AccountRepositoryGateway accountRepositoryGateway;
 
-    public CreateAccountUseCase(IEventStore repository, AccountRepository accountRepository) {
-        this.repository = repository;
-        this.accountRepository = accountRepository;
+    public CreateAccountUseCase(IEventStoreGateway repository, AccountRepositoryGateway accountRepository) {
+        this.iEventStoreGateway = repository;
+        this.accountRepositoryGateway = accountRepository;
     }
 
 
@@ -24,22 +24,21 @@ public class CreateAccountUseCase implements IUseCase<CreateAccountRequest,Creat
     //You maybe want to check Jacobo's repository to see how he did it
     public CreateAccountResponse execute(CreateAccountRequest cmd) {
         //Create the aggregate, remember this usecase is to create the account the first time so just have to create it.
-        Customer customer = new Customer();
+        AccountAggregate customer = new AccountAggregate();
 
         //Then we create the account
         customer.createAccount(cmd.getBalance(), cmd.getNumber(), cmd.getCustomerName());
 
         //Save the account on the account repository
-        accountRepository.save(
+        accountRepositoryGateway.save(
                 new AccountDTO(
                         customer.getAccount().getBalance().getValue(),
                         customer.getAccount().getNumber().getValue(),
                         customer.getAccount().getName().getValue()
-
                 ));
 
         //Last step for events to be saved
-        customer.getUncommittedEvents().forEach(repository::save);
+        customer.getUncommittedEvents().forEach(iEventStoreGateway::save);
 
         customer.markEventsAsCommitted();
 

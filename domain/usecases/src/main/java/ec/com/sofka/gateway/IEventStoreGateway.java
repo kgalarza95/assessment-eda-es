@@ -5,7 +5,7 @@ import ec.com.sofka.generics.domain.DomainEvent;
 import java.util.List;
 
 //Here you can create more functions according to the needs of the project related to events
-public interface IEventStore {
+public interface IEventStoreGateway {
     DomainEvent save(DomainEvent event);
     List<DomainEvent> findAggregate(String aggregateId);
 }

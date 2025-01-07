@@ -1,7 +1,8 @@
-package ec.com.sofka.aggregate.events;
+package ec.com.sofka.aggregate.account.events;
 
 public enum EventsEnum {
     ACCOUNT_CREATED,
+    ACCOUNT_UPDATED,
     ACCOUNT_DEPOSITED,
     ACCOUNT_WITHDRAWN,
     ACCOUNT_TRANSFERRED,

@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories(basePackages = "ec.com.sofka.database.account",
        mongoTemplateRef = "accountMongoTemplate")
 public class AccountMongoConfig {
+
     @Primary
     @Bean(name = "accountsDatabaseFactory")
     public MongoDatabaseFactory accountsDatabaseFactory(

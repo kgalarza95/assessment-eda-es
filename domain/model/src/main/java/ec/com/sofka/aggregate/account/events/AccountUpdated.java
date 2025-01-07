@@ -1,16 +1,17 @@
-package ec.com.sofka.aggregate.events;
+package ec.com.sofka.aggregate.account.events;
 
 import ec.com.sofka.generics.domain.DomainEvent;
 
 import java.math.BigDecimal;
 
-public class AccountCreated extends DomainEvent {
+public class AccountUpdated extends DomainEvent {
+
     private final String accountNumber;
     private final BigDecimal accountBalance;
     private final String name;
 
-    public AccountCreated(String accountNumber, BigDecimal accountBalance, String name) {
-        super(EventsEnum.ACCOUNT_CREATED.name());
+    public AccountUpdated(String accountNumber, BigDecimal accountBalance, String name) {
+        super(EventsEnum.ACCOUNT_UPDATED.name());
         this.accountNumber = accountNumber;
         this.accountBalance = accountBalance;
         this.name = name;

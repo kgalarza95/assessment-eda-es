@@ -8,6 +8,7 @@ import ec.com.sofka.generics.utils.Entity;
 
 //4. Creation of an Entity class - They have logic and behavior, otherwise is a ValueObject.
 public class Account extends Entity<AccountId> {
+
     private final Balance balance;
     private final NumberAcc numberAcc;
     private final Name name;
