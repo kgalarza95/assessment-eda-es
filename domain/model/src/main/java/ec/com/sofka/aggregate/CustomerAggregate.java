@@ -73,12 +73,23 @@ public class CustomerAggregate extends AggregateRoot<CustomerId> {
         addEvent(new AccountUpdated(accountId, balance, accountNumber, name, status)).apply();
     }
 
+//    public static CustomerAggregate from(final String id, List<DomainEvent> events) {
+//        CustomerAggregate customer = new CustomerAggregate(id);
+//        events.forEach((event) -> customer.addEvent(event).apply());
+//        events.stream()
+//                .filter(event -> id.equals(event.getAggregateRootId()))
+//                .forEach((event) -> customer.addEvent(event).apply());
+//        customer.markEventsAsCommitted();
+//        return customer;
+//    }
+
     public static CustomerAggregate from(final String id, List<DomainEvent> events) {
         CustomerAggregate customer = new CustomerAggregate(id);
         events.stream()
                 .filter(event -> id.equals(event.getAggregateRootId()))
                 .reduce((first, second) -> second)
                 .ifPresent(event -> customer.addEvent(event).apply());
+        customer.markEventsAsCommitted();
         return customer;
     }
 
